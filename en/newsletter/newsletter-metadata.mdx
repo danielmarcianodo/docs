@@ -25,6 +25,12 @@ This method returns the channel metadata with all the channel information and it
   Channel ID
 </ParamField>
 
+### Query Parameters
+
+<ParamField query="mustGetSubscribers" type="boolean">
+  When sent as `true`, includes the `subscribers` field in the response with the channel's list of subscribers. Default value is `false`.
+</ParamField>
+
 ---
 
 ## Response
@@ -83,6 +89,44 @@ This method returns the channel metadata with all the channel information and it
   </Expandable>
 </ResponseField>
 
+<ResponseField name="subscribers" type="array">
+  List with up to 9 channel subscribers. Only returned when the `mustGetSubscribers` parameter is sent as `true`.
+  <Expandable title="Properties">
+    <ResponseField name="id" type="string">
+      Subscriber ID (can be a phone number or a `@lid`)
+    </ResponseField>
+    <ResponseField name="phoneNumber" type="string">
+      Subscriber's phone number, when available
+    </ResponseField>
+    <ResponseField name="displayName" type="string">
+      Subscriber's display name, when available
+    </ResponseField>
+    <ResponseField name="username" type="string">
+      Subscriber's username, when available
+    </ResponseField>
+    <ResponseField name="role" type="string">
+      Subscriber's role in the channel (OWNER, ADMIN or SUBSCRIBER)
+    </ResponseField>
+    <ResponseField name="followTime" type="number">
+      Timestamp of when the user started following the channel, when available
+    </ResponseField>
+    <ResponseField name="adminProfile" type="object">
+      Subscriber's admin profile information, when they are an admin of the channel
+      <Expandable title="Properties">
+        <ResponseField name="id" type="string">
+          Admin ID
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          Admin name
+        </ResponseField>
+        <ResponseField name="pictureDirectPath" type="string">
+          Admin's profile picture path, when available
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
 ```json
 {
   "id": "999999999999999999@newsletter",
@@ -98,12 +142,27 @@ This method returns the channel metadata with all the channel information and it
   "viewMetadata": {
     "mute": "OFF",
     "role": "OWNER"
-  }
+  },
+  "subscribers": [
+    {
+      "id": "199690293383294@lid",
+      "phoneNumber": null,
+      "displayName": null,
+      "username": null,
+      "role": "SUBSCRIBER",
+      "followTime": null,
+      "adminProfile": null
+    }
+  ]
 }
 ```
 
 <Info>
 The channel ID must always contain the **@newsletter** suffix, as this is the standard used by WhatsApp.
+</Info>
+
+<Info>
+WhatsApp only returns subscribers who are in the requester's contact list, and the requester must be an admin of the channel. In addition, this list returns at most 9 subscribers, the same limit shown on the channel info screen in WhatsApp Web. To get the complete list of subscribers, use the [List channel subscribers](/en/newsletter/newsletter-subscribers) endpoint.
 </Info>
 
 ### 405

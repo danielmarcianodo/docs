@@ -25,6 +25,12 @@ Este método retorna o metadata do canal com todas as informações do canal e d
   ID do canal
 </ParamField>
 
+### Query Parameters
+
+<ParamField query="mustGetSubscribers" type="boolean">
+  Quando enviado como `true`, inclui na resposta o campo `subscribers` com a lista de seguidores do canal. O valor padrão é `false`.
+</ParamField>
+
 ---
 
 ## Response
@@ -83,6 +89,44 @@ Este método retorna o metadata do canal com todas as informações do canal e d
   </Expandable>
 </ResponseField>
 
+<ResponseField name="subscribers" type="array">
+  Lista com até 9 seguidores do canal. Só é retornada quando o parâmetro `mustGetSubscribers` é enviado como `true`.
+  <Expandable title="Propriedades">
+    <ResponseField name="id" type="string">
+      ID do seguidor (pode ser um número de telefone ou um `@lid`)
+    </ResponseField>
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do seguidor, quando disponível
+    </ResponseField>
+    <ResponseField name="displayName" type="string">
+      Nome de exibição do seguidor, quando disponível
+    </ResponseField>
+    <ResponseField name="username" type="string">
+      Nome de usuário do seguidor, quando disponível
+    </ResponseField>
+    <ResponseField name="role" type="string">
+      Papel do seguidor no canal (OWNER, ADMIN ou SUBSCRIBER)
+    </ResponseField>
+    <ResponseField name="followTime" type="number">
+      Timestamp de quando o usuário começou a seguir o canal, quando disponível
+    </ResponseField>
+    <ResponseField name="adminProfile" type="object">
+      Informações do perfil de admin do seguidor, quando ele for admin do canal
+      <Expandable title="Propriedades">
+        <ResponseField name="id" type="string">
+          ID do admin
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          Nome do admin
+        </ResponseField>
+        <ResponseField name="pictureDirectPath" type="string">
+          Caminho da imagem de perfil do admin, quando disponível
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
 ```json
 {
   "id": "999999999999999999@newsletter",
@@ -98,12 +142,27 @@ Este método retorna o metadata do canal com todas as informações do canal e d
   "viewMetadata": {
     "mute": "OFF",
     "role": "OWNER"
-  }
+  },
+  "subscribers": [
+    {
+      "id": "199690293383294@lid",
+      "phoneNumber": null,
+      "displayName": null,
+      "username": null,
+      "role": "SUBSCRIBER",
+      "followTime": null,
+      "adminProfile": null
+    }
+  ]
 }
 ```
 
 <Info>
 O ID do canal sempre deve conter o sufixo **@newsletter**, pois esse é o padrão utilizado pelo próprio WhatsApp.
+</Info>
+
+<Info>
+O WhatsApp só retorna os seguidores que estiverem na lista de contatos de quem realizou a requisição, e é necessário que quem realiza a requisição seja admin do canal. Além disso, essa listagem retorna no máximo 9 seguidores, o mesmo limite exibido na tela de informações do canal no WhatsApp Web. Para obter a listagem completa de seguidores, utilize o endpoint [Listar seguidores do canal](/newsletter/newsletter-subscribers).
 </Info>
 
 ### 405
