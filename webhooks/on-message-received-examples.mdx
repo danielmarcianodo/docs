@@ -1824,10 +1824,6 @@ Todos os retornos de webhook possuem os seguintes atributos em comum:
 
 Além das mensagens, o webhook também recebe notificações de chamadas, grupos e conta.
 
-<AccordionGroup>
-
-</AccordionGroup>
-
 ### Chamadas
 
 <AccordionGroup>
@@ -2216,6 +2212,74 @@ Além das mensagens, o webhook também recebe notificações de chamadas, grupos
   "notification": "MEMBERSHIP_APPROVAL_REQUEST",
   "notificationParameters": ["5544999999999", "5544888888888"],
   "requestMethod": "non_admin_add"
+}
+```
+</Accordion>
+
+<Accordion title="Grupo suspenso">
+```json
+{
+  "chatLid": null,
+  "isGroup": true,
+  "isNewsletter": false,
+  "instanceId": "A20DA9C0183A2D35A260F53F5D2B9244",
+  "messageId": "A20DA9C0183A2D35A260F53F5D2B9244",
+  "phone": "5544999999999-group",
+  "connectedPhone": "5544999999999",
+  "fromMe": false,
+  "fromApi": false,
+  "momment": 1682017970000,
+  "expiresAt": null,
+  "status": "RECEIVED",
+  "chatName": "GROUP NAME",
+  "senderPhoto": null,
+  "senderName": "",
+  "photo": null,
+  "broadcast": false,
+  "participantPhone": null,
+  "participantLid": null,
+  "referenceMessageId": null,
+  "externalAdReply": null,
+  "forwarded": false,
+  "type": "ReceivedCallback",
+  "notification": "GROUP_SUSPENDED",
+  "notificationParameters": [],
+  "callId": null,
+  "code": null,
+}
+```
+</Accordion>
+
+<Accordion title="Suspensão do grupo removida">
+```json
+{
+  "chatLid": null,
+  "isGroup": true,
+  "isNewsletter": false,
+  "instanceId": "A20DA9C0183A2D35A260F53F5D2B9244",
+  "messageId": "A20DA9C0183A2D35A260F53F5D2B9244",
+  "phone": "5544999999999-group",
+  "connectedPhone": "5544999999999",
+  "fromMe": false,
+  "fromApi": false,
+  "momment": 1682017970000,
+  "expiresAt": null,
+  "status": "RECEIVED",
+  "chatName": "GROUP NAME",
+  "senderPhoto": null,
+  "senderName": "",
+  "photo": null,
+  "broadcast": false,
+  "participantPhone": null,
+  "participantLid": null,
+  "referenceMessageId": null,
+  "externalAdReply": null,
+  "forwarded": false,
+  "type": "ReceivedCallback",
+  "notification": "GROUP_UNSUSPENDED",
+  "notificationParameters": [],
+  "callId": null,
+  "code": null,
 }
 ```
 </Accordion>
