@@ -107,6 +107,10 @@ Quando ocorre um erro no envio, o retorno inclui o campo `error` com a descriç�
   <Accordion title="You can't message this group as you don't have permission">
     Você não tem permissão para enviar mensagens neste grupo.
   </Accordion>
+  <Accordion title="This group has been suspended">
+    Você não consegue enviar mensagem neste grupo pois ele foi suspenso.
+    Quando este erro ocorre, o campo `errorCode` é enviado com o valor `"GROUP_SUSPENDED"`
+  </Accordion>
   <Accordion title="This type of message can only be sent in groups">
     Este tipo de mensagem só pode ser enviado em grupos, não em conversas privadas.
   </Accordion>
